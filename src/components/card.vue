@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[350px] bg-white rounded p-3 shadow font-['Quicksand']">
+    <div class="w-[350px] bg-white rounded p-3 shadow font-['elite']">
       <div 
         v-if="mediaHref" 
         :style="mediaBg" 

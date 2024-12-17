@@ -1,10 +1,9 @@
-import Card from './Card.vue';
+import Card from './card.vue';
 
-// Default export with component metadata
 export default {
   title: 'Components/Card',
   component: Card,
-  // Optional: Add tags, parameters, decorators, etc.
+
   tags: ['autodocs'],
   argTypes: {
     title: { control: 'text' },
@@ -15,7 +14,6 @@ export default {
   }
 };
 
-// Create a template for your stories
 const Template = (args) => ({
   components: { Card },
   setup() {
@@ -24,7 +22,6 @@ const Template = (args) => ({
   template: '<Card v-bind="args" />'
 });
 
-// Create different stories using the template
 export const Default = Template.bind({});
 Default.args = {
   title: 'Example Card',
