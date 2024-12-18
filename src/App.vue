@@ -38,14 +38,14 @@ const scroll = (direction) => {
   <header>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-40">
-        <!-- Logo -->
+        <!-- Logo with RouterLink -->
         <div class="flex-shrink-0">
-          <RouterLink to="/" >
-          <img 
-          src="../src/assets/dbaLogo.png" 
-          alt="DBA Logo" 
-          class="h-20 w-auto"
-        />
+          <RouterLink to="/">
+            <img
+              src="../src/assets/dbaLogo.png"
+              alt="DBA Logo"
+              class="h-20 w-auto"
+            />
           </RouterLink>
         </div>
 
@@ -60,18 +60,16 @@ const scroll = (direction) => {
           </div>
         </div>
 
-        <!-- Login Link -->
-        <div>
-          <RouterLink to="/login" class="text-blue-600 hover:text-blue-800">
-            Log på
-          </RouterLink>
+        <!-- Login Link (now just a button/div) -->
+        <div class="text-blue-600 hover:text-blue-800 cursor-pointer">
+          Log på
         </div>
       </div>
 
       <!-- Navigation Container with Arrows -->
       <div class="relative flex items-center h-4">
         <!-- Left Arrow -->
-        <button 
+        <button
           @click="scroll('left')"
           class="absolute left-0 z-10 bg-white bg-opacity-90 p-1 rounded-full shadow-md hover:bg-gray-100"
         >
@@ -80,25 +78,24 @@ const scroll = (direction) => {
           </svg>
         </button>
 
-        <!-- Navigation Items -->
-        <div 
+        <!-- Navigation Items (now without RouterLink) -->
+        <div
           ref="scrollContainer"
           class="flex space-x-6 overflow-x-auto scrollbar-hide mx-8 py-2 scroll-smooth"
           style="scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none;"
         >
-          <RouterLink
+          <div
             v-for="(category, index) in shuffledCategories"
             :key="index"
-            :to="`/${category.name.toLowerCase().replace(' ', '-')}`"
-            class="text-gray-600 hover:text-gray-900 whitespace-nowrap px-3 py-2 flex items-center gap-2"
+            class="text-gray-600 hover:text-gray-900 whitespace-nowrap px-3 py-2 flex items-center gap-2 cursor-pointer"
           >
             <span>{{ category.icon }}</span>
             <span>{{ category.name }}</span>
-          </RouterLink>
+          </div>
         </div>
 
         <!-- Right Arrow -->
-        <button 
+        <button
           @click="scroll('right')"
           class="absolute right-0 z-10 bg-white bg-opacity-90 p-1 rounded-full shadow-md hover:bg-gray-100"
         >

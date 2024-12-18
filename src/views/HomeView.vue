@@ -1,13 +1,16 @@
 <script setup>
 import Card from '../components/Card/ProductCard.vue' 
 
+
+
 const catListings = [
   {
+    
     id: 1,
-    title: 'Gryden klar Sphynx',
+    title: 'Darkmode Sphynx',
     price: '9000 kr',
     location: '8660 Vråde',
-    image: 'src/assets/kat3.png'
+    image: 'src/assets/kat5.png'
   },
   {
     id: 2,
@@ -32,10 +35,10 @@ const catListings = [
   },
   {
     id: 5,
-    title: 'Model Sphynx',
+    title: 'Gryde klar Sphynx',
     price: '5 kr',
     location: '3720 Aakirkeby',
-    image: 'src/assets/kat8.png'
+    image: 'src/assets/kat3.png'
   },
   {
     id: 6,
@@ -56,7 +59,7 @@ const catListings = [
     title: 'Model Sphynx',
     price: '5 kr',
     location: '3720 Aakirkeby',
-    image: 'src/assets/kat11.png'
+    image: 'src/assets/kat8.png'
   },
   {
     id: 9,
@@ -108,13 +111,13 @@ const catListings = [
     image: 'src/assets/kat17.png'
   },
 
-  // Add more cats as needed
 ]
 </script>
 
 <template>
   <main class="max-w-7xl mx-auto p-7 h-9">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+  
       <Card
         v-for="cat in catListings"
         :key="cat.id"
