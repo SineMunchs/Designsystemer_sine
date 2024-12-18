@@ -1,18 +1,121 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
+
+const categories = [
+  { name: 'Biler', icon: '🚗' },
+  { name: 'Camping', icon: '🚐' },
+  { name: 'Biltilbehør', icon: '🛞' },
+  { name: 'Have og byg', icon: '🛠' },
+  { name: 'Til boligen', icon: '🪑' },
+  { name: 'Til børn', icon: '👶' },
+  { name: 'Tøj og mode', icon: '👕' },
+  { name: 'Sport og fritid', icon: '⚽' },
+  { name: 'Både', icon: '🚤' },
+  { name: 'Cykler', icon: '🚲' },
+  { name: 'Hobby', icon: '✂️' }
+]
+
+const shuffledCategories = [...categories]
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 15)
+
+const scrollContainer = ref(null)
+
+const scroll = (direction) => {
+  if (scrollContainer.value) {
+    const scrollAmount = 200
+    const newScrollPosition = scrollContainer.value.scrollLeft + (direction === 'right' ? scrollAmount : -scrollAmount)
+    scrollContainer.value.scrollTo({
+      left: newScrollPosition,
+      behavior: 'smooth'
+    })
+  }
+}
 </script>
 
 <template>
   <header>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-40">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <RouterLink to="/" >
+          <img 
+          src="../src/assets/dbaLogo.png" 
+          alt="DBA Logo" 
+          class="h-20 w-auto"
+        />
+          </RouterLink>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-2xl mx-8">
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Søg på DBA"
+              class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+
+        <!-- Login Link -->
+        <div>
+          <RouterLink to="/login" class="text-blue-600 hover:text-blue-800">
+            Log på
+          </RouterLink>
+        </div>
+      </div>
+
+      <!-- Navigation Container with Arrows -->
+      <div class="relative flex items-center h-4">
+        <!-- Left Arrow -->
+        <button 
+          @click="scroll('left')"
+          class="absolute left-0 z-10 bg-white bg-opacity-90 p-1 rounded-full shadow-md hover:bg-gray-100"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <!-- Navigation Items -->
+        <div 
+          ref="scrollContainer"
+          class="flex space-x-6 overflow-x-auto scrollbar-hide mx-8 py-2 scroll-smooth"
+          style="scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none;"
+        >
+          <RouterLink
+            v-for="(category, index) in shuffledCategories"
+            :key="index"
+            :to="`/${category.name.toLowerCase().replace(' ', '-')}`"
+            class="text-gray-600 hover:text-gray-900 whitespace-nowrap px-3 py-2 flex items-center gap-2"
+          >
+            <span>{{ category.icon }}</span>
+            <span>{{ category.name }}</span>
+          </RouterLink>
+        </div>
+
+        <!-- Right Arrow -->
+        <button 
+          @click="scroll('right')"
+          class="absolute right-0 z-10 bg-white bg-opacity-90 p-1 rounded-full shadow-md hover:bg-gray-100"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
   <RouterView />
 </template>
 
 <style scoped>
-
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 </style>
